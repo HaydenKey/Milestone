@@ -1,13 +1,17 @@
+//TODO change to model implementation
+Match = require('../models/match');
+
+
 db = [
-    {
-        connectionId: "0",
-        player0: "Meurem",
-        player0Rank: "9p",
-        player1: "Komugi",
-        player1Rank: "10p",
-        location: "The Palace",
-        date: "9/9/2020 at 11:59"
-    },
+    new Match(
+        0,
+        "Meurem",
+        "9p",
+        "Komugi",
+        "10p",
+        "The Palace",
+        "9/9/2020 at 11:59"
+    ),
     {
         connectionId: "1",
         player0: "Chad",

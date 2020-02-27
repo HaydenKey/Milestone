@@ -5,7 +5,7 @@ const Match = require("../models/match");
 const router = express.Router();
 
 router.get("/myMatches", (req, res) => {
-    res.render("myMatches");
+    res.render("matches");
 });
 
 router.get("/:id", function(req, res) {
