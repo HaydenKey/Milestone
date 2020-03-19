@@ -16,26 +16,25 @@
                 <p>You have a match scheduled</p>
                 <div class="inner">
                     <header>
-                        <h3>You vs Chad.</h3>
+                        <h3><%= data.player0 %> vs <%= data.player1 %></h3>
                         <p>Chad is the coolest kid around, next to you!</p><br>
                     </header>
-                    <p><strong>Rank of opponent:</strong> 12k</p>
-                    <p><strong>Age:</strong> 22 years old</p>
-                    <p><strong>Date:</strong> Friday, January 31st, 2020</p>
-                    <p><strong>Time:</strong> 5:30-6:30</p>
-                    <p><strong>Location:</strong> East Hall, 2nd floor, board 62</p>
+                    <p><strong>Rank of <%= data.player0 %>:</strong> <%= data.player0Rank %></p>
+                    <p><strong>Rank of <%= data.player1 %>:</strong> <%= data.player1Rank %></p>
+                    <p><strong>Date:</strong> <%= data.date %> </p>
+                    <p><strong>Location:</strong> <%= data.location %> </p>
                 </div>
             </div>
 
-            <div class="aside">
-                <h2>Will you be attenting?</h2><br>
-                <button>Yes</button>
-                <button>No</button>
-                <button>Maybe</button>
+            <div class="container">
+                <div class="inner">
+                    <h2>Will you be attenting?</h2><br>
+                    <button>Yes</button>
+                    <button>No</button>
+                    <button>Maybe</button>
+                </div>
             </div>
         </main>
-
-
 
         <%- include ('partials/footer.ejs')%>
     </body>

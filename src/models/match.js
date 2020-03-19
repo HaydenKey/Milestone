@@ -5,8 +5,8 @@ class Match {
         this.player1 = player1;
         this.location = location;
         this.date = date;
-        this._player0Rank = player0Rank;
-        this._player1Rank = player1Rank;
+        this.player0Rank = player0Rank;
+        this.player1Rank = player1Rank;
     }
 
     getConnectionId() {
@@ -26,11 +26,11 @@ class Match {
     }
 
     getPlayer0Rank() {
-        return this._player0Rank;
+        return this.player0Rank;
     }
 
     setPlayer0Rank(value) {
-        this._player0Rank = value;
+        this.player0Rank = value;
     }
 
     getPlayer1() {
@@ -42,11 +42,11 @@ class Match {
     }
 
     getPlayer1Rank() {
-        return this._player1Rank;
+        return this.player1Rank;
     }
 
     setPlayer1Rank(value) {
-        this._player1Rank = value;
+        this.player1Rank = value;
     }
 
     getLocation() {

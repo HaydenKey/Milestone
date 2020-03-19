@@ -11,15 +11,17 @@ router.get("/myMatches", (req, res) => {
 router.get("/:id", function(req, res) {
     let id = req.params.id;
     let con = new MatchDB().getMatch(id);
-    let currentConnection = new Match(
-        con.connectionId,
+    let currentMatch = new Match(
+        con.id,
         con.player0,
+        con.player0Rank,
         con.player1,
+        con.player1Rank,
         con.location,
         con.date
     );
 
-    res.render("connection", { data: currentConnection });
+    res.render("match", { data: currentMatch });
 });
 
 module.exports = router;

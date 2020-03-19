@@ -17,18 +17,18 @@
             <p>Mentor connections are generally with a player 4 ranks above you or more.</p>
             <div class="inner">
                 <header>
-                    <h3>Meruem</h3>
+                    <h3><a href="/match/<%= data.matchData[0].id %>"><%= data.matchData[0].player0 %></a></h3>
                     <p>A Chimera Ant that is destined to take over the world.</p>
                 </header>
-                <p>Rank: 9p</p>
+                <p>Rank: <%= data.matchData[0].player0Rank %></p>
                 <p>Age: 3 months old</p>
             </div>
             <div class="inner">
                 <header>
-                    <h3>Komugi</h3>
+                    <h3><a href="/match/<%= data.matchData[0].id %>"><%= data.matchData[0].player1 %></a></h3>
                     <p>A blind girl who is dang good at this game.</p>
                 </header>
-                <p>Rank: 10p</p>
+                <p>Rank: <%= data.matchData[0].player1Rank %></p>
                 <p>Age: 19 years old</p>
             </div>
         </div>
@@ -38,18 +38,18 @@
             <p>Player connections are generally with a player 3 ranks above you or less.</p>
             <div class="inner">
                 <header>
-                    <h3>Brad</h3>
+                    <h3><a href="/match/<%= data.matchData[0].id %>"><%= data.matchData[1].player0 %></a></h3>
                     <p>Brad is the coolest kid around, next to Chad</p>
                 </header>
-                <p>Rank: 10k</p>
+                <p>Rank: <%= data.matchData[1].player0Rank %></p>
                 <p>Age: 22 years old</p>
             </div>
             <div class="inner">
                 <header>
-                    <h3>Chad</h3>
+                    <h3><a href="/match/<%= data.matchData[0].id %>"><%= data.matchData[1].player1 %></a></h3>
                     <p>Chad is the coolest kid around, next to Brad</p>
                 </header>
-                <p>Rank: 12k</p>
+                <p>Rank: <%= data.matchData[1].player1Rank %></p>
                 <p>Age: 22 years old</p>
             </div>
         </div>
@@ -64,8 +64,8 @@
             progress into the professional ranking, they begin as a 1 professional dan (1p) and the only very best
             can progress to a 9 dan (9p).<br><br>
 
-            Beginner: 30k-20k <br>
-            Casual Player: 19k-10k <br>
+            Beginner: 30k-20k<br>
+            Casual Player: 19k-10k<br>
             Intermediate Amateur: 9k-1k<br>
             Advanced Amateur: 1d-7d<br>
             Professional Player: 1-9p<br>
