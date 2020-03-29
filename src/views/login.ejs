@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Go Tournament</title>
+    <link rel="stylesheet" type="text/css" href="../assets/style.css">
+</head>
+<body>
+<%- include ('partials/header.ejs')%>
+<%- include ('partials/nav.ejs')%>
+
+<main>
+    <div class="container">
+        <h2> Welcome to the Go Network! </h2>
+        <div class="inner">
+            <form method="POST" action="login">
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" id="username" required><br>
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" id="password" required><br><br>
+
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label><br><br>
+                <input type="submit" value="Login" placeholder="Login">
+            </form>
+        </div>
+    </div>
+</main>
+
+<%- include ('partials/footer.ejs')%>
+</body>
+</html>
