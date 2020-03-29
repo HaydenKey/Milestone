@@ -1,0 +1,9 @@
+{
+  "name": "Milestone",
+  "version": "1.0.0",
+  "dependencies": {
+    "body-parser": "latest",
+    "express-session": "latest",
+    "express": "latest"
+  }
+}

@@ -13,45 +13,48 @@
 
     <main>
         <div class="container">
-            <h2>Mentor Connections</h2>
-            <p>Mentor connections are generally with a player 4 ranks above you or more.</p>
-            <div class="inner">
-                <header>
-                    <h3><a href="/match/<%= data.matchData[0].id %>"><%= data.matchData[0].player0 %></a></h3>
-                    <p>A Chimera Ant that is destined to take over the world.</p>
-                </header>
-                <p>Rank: <%= data.matchData[0].player0Rank %></p>
-                <p>Age: 3 months old</p>
-            </div>
-            <div class="inner">
-                <header>
-                    <h3><a href="/match/<%= data.matchData[0].id %>"><%= data.matchData[0].player1 %></a></h3>
-                    <p>A blind girl who is dang good at this game.</p>
-                </header>
-                <p>Rank: <%= data.matchData[0].player1Rank %></p>
-                <p>Age: 19 years old</p>
-            </div>
+            <h2>Attending</h2>
+            <% if (profile.getUserMatchesRsvp("yes").length !== 0) {%>
+                <% for (let x = 0; x < profile.getUserMatchesRsvp("yes").length; x++) { %>
+                    <%console.log(x);%>
+                    <div class="inner">
+                        <header>
+                            <h3><a href="/match/<%= data[x].id %>"><%= data[x].title %></a></h3>
+                        </header>
+                        <p>Location: <%= data[x].location %></p>
+                        <p>Date: <%= data[x].date %></p>
+                    </div>
+                <% } %>
+            <%} else {%>
+                <div class="inner">
+                    <header>
+                        <h3>No Matches</h3>
+                    </header>
+                    <p>Find a Match and hit "Yes" to say you are coming!</p>
+                </div>
+            <%}%>
         </div>
 
         <div class="container">
-            <h2>Player Connections</h2>
-            <p>Player connections are generally with a player 3 ranks above you or less.</p>
-            <div class="inner">
-                <header>
-                    <h3><a href="/match/<%= data.matchData[0].id %>"><%= data.matchData[1].player0 %></a></h3>
-                    <p>Brad is the coolest kid around, next to Chad</p>
-                </header>
-                <p>Rank: <%= data.matchData[1].player0Rank %></p>
-                <p>Age: 22 years old</p>
-            </div>
-            <div class="inner">
-                <header>
-                    <h3><a href="/match/<%= data.matchData[0].id %>"><%= data.matchData[1].player1 %></a></h3>
-                    <p>Chad is the coolest kid around, next to Brad</p>
-                </header>
-                <p>Rank: <%= data.matchData[1].player1Rank %></p>
-                <p>Age: 22 years old</p>
-            </div>
+            <h2>Might</h2>
+            <% if (profile.getUserMatchesRsvp("maybe").length !== 0) {%>
+                <% for (let x = 0; x < profile.getUserMatchesRsvp("maybe").length; x++) { %>
+                    <div class="inner">
+                        <header>
+                            <h3><a href="/match/<%= data[x].id %>"><%= data[x].title %></a></h3>
+                        </header>
+                        <p>Location: <%= data[x].location %></p>
+                        <p>Date: <%= data[x].date %></p>
+                    </div>
+                <% } %>
+            <%} else {%>
+                <div class="inner">
+                    <header>
+                        <h3>No Matches</h3>
+                    </header>
+                    <p>Find a Match and hit "maybe" if you might come!</p>
+                </div>
+            <%}%>
         </div>
     </main>
 
