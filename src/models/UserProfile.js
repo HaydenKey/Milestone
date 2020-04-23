@@ -21,7 +21,6 @@ const matchList = [
         id: "5",
         userName: "hkey8@uncc.edu",
         match: "Akuma vs Ken",
-        title: "Akuma vs Ken",
         rank: "kyu",
         location: "Caesar's Palace",
         date: "9/9/2020 at 11:59",
@@ -56,7 +55,6 @@ class UserProfile {
 
     getUserMatchesRsvp(username, rsvp) {
         let userMatches = [];
-
         username = String(username);
         rsvp = String(rsvp);
 
@@ -65,7 +63,6 @@ class UserProfile {
                 userMatches.push(matchList[x]);
             }
         }
-
         return userMatches;
     }
 

@@ -18,9 +18,7 @@ router.post("/login", (req, res) => {
     yesMatches = profile.getUserMatchesRsvp(req.body.username,"yes");
     maybeMatches = profile.getUserMatchesRsvp(req.body.username,"maybe");
 
-    let data = new MatchDB().getMatches();
-
-    res.render('matches', { data: data, yesMatches: yesMatches, maybeMatches: maybeMatches });
+    res.render('matches', { yesMatches: yesMatches, maybeMatches: maybeMatches });
 });
 
 module.exports = router;

@@ -5,19 +5,15 @@ const UserProfile = require("../models/UserProfile");
 const router = express.Router();
 
 router.get("/matches", (req, res) => {
+    let username = req.session.profile.userName;
+    let user = new UserProfile(username);
     let yesMatches = [];
     let maybeMatches = [];
 
-    // should be executing twice, but only executing once
-    console.log("getting /matches");
+    yesMatches = user.getUserMatchesRsvp(username,"yes");
+    maybeMatches = user.getUserMatchesRsvp(username, "maybe");
 
-    for (let i = 0; i < yesMatches.length; i++) {
-        yesMatches += new MatchDB().getMatch(yesMatches[i].id);
-    }
-
-    for (let i = 0; i < maybeMatches.length; i++) {
-        maybeMatches += new MatchDB().getMatch(maybeMatches[i].id);
-    }
+    console.log(yesMatches.keys());
 
     res.render('matches', { yesMatches: yesMatches, maybeMatches: maybeMatches });
 });
