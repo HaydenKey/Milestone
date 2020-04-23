@@ -1,24 +1,32 @@
 const matchList = [
     {
+        id: "0",
         userName: "hkey8@uncc.edu",
         match: "Meurem vs Komugi",
+        rank: "dan",
+        location: "The Palace",
+        date: "9/9/2020 at 11:59",
         rsvp: "yes"
     },
     {
+        id: "1",
         userName: "hkey8@uncc.edu",
         match: "Chad vs Brad",
+        rank: "dan",
+        location: "The ThunderDome",
+        date: "9/9/2020 at 11:59",
         rsvp: "yes"
     },
     {
+        id: "5",
         userName: "hkey8@uncc.edu",
         match: "Akuma vs Ken",
+        title: "Akuma vs Ken",
+        rank: "kyu",
+        location: "Caesar's Palace",
+        date: "9/9/2020 at 11:59",
         rsvp: "maybe"
-    },
-    {
-        userName: "fufi@uncc.edu",
-        match: "Akuma vs Ken",
-        rsvp: "maybe"
-    },
+    }
 ];
 
 class UserProfile {
@@ -26,9 +34,9 @@ class UserProfile {
         this.userName = userName;
     }
 
-    getUserMatch(match) {
+    getUserMatch(username, match) {
         for (let x = 0; x < matchList.length; x++) {
-            if (this.userName === matchList[x].userName && match === matchList[x].match) {
+            if (username === matchList[x].userName && match === matchList[x].match) {
                 return matchList[x];
             }
         }
@@ -46,11 +54,14 @@ class UserProfile {
         return userMatches;
     }
 
-    getUserMatchesRsvp(rsvp) {
+    getUserMatchesRsvp(username, rsvp) {
         let userMatches = [];
 
+        username = String(username);
+        rsvp = String(rsvp);
+
         for (let x = 0; x < matchList.length; x++) {
-            if (this.userName === matchList[x].userName && rsvp === matchList[x].rsvp) {
+            if (matchList[x].userName == username && rsvp == matchList[x].rsvp) {
                 userMatches.push(matchList[x]);
             }
         }
@@ -58,10 +69,10 @@ class UserProfile {
         return userMatches;
     }
 
-    addMatch(match, rsvp) {
+    addMatch(username, match, rsvp) {
         // check if already in list
         for (let x = 0; x < matchList.length; x++) {
-            if (this.userName === matchList[x].userName && match === matchList[x].match) {
+            if (username === matchList[x].userName && match === matchList[x].match) {
                 return;
             }
         }
@@ -72,12 +83,13 @@ class UserProfile {
             rsvp: rsvp
         };
 
-        match.push(temp);
+        matchList.push(temp);
     }
 
-    removeMatch(match) {
+    removeMatch(username, match) {
         for (let x = 0; x < matchList.length; x++) {
-            if (this.userName === matchList[x].userName && match === matchList[x].match) {
+            if (username === matchList[x].userName && match === matchList[x].match) {
+                console.log("ligma");
                 matchList.splice(x, 1);
             }
         }

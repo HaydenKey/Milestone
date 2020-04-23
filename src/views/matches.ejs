@@ -14,15 +14,15 @@
     <main>
         <div class="container">
             <h2>Attending</h2>
-            <% if (profile.getUserMatchesRsvp("yes").length !== 0) {%>
-                <% for (let x = 0; x < profile.getUserMatchesRsvp("yes").length; x++) { %>
-                    <%console.log(x);%>
+            <% if (yesMatches.length !== 0) {%>
+                <% for (let x = 0; x < yesMatches.length; x++) { %>
+                    <% console.log("YES MATCH: " + Object.keys(yesMatches[x])); %>
                     <div class="inner">
                         <header>
-                            <h3><a href="/match/<%= data[x].id %>"><%= data[x].title %></a></h3>
+                            <h3><a href="/match/<%= yesMatches[x].id %>"><%= yesMatches[x].match %></a></h3>
                         </header>
-                        <p>Location: <%= data[x].location %></p>
-                        <p>Date: <%= data[x].date %></p>
+                        <p>Location: <%= yesMatches[x].location %></p>
+                        <p>Date: <%= yesMatches[x].date %></p>
                     </div>
                 <% } %>
             <%} else {%>
@@ -36,15 +36,15 @@
         </div>
 
         <div class="container">
-            <h2>Might</h2>
-            <% if (profile.getUserMatchesRsvp("maybe").length !== 0) {%>
-                <% for (let x = 0; x < profile.getUserMatchesRsvp("maybe").length; x++) { %>
+            <h2>Might Be Attending</h2>
+            <% if (maybeMatches.length !== 0) { %>
+                <% for (let x = 0; x < maybeMatches.length; x++) { %>
                     <div class="inner">
                         <header>
-                            <h3><a href="/match/<%= data[x].id %>"><%= data[x].title %></a></h3>
+                            <h3><a href="/match/<%= maybeMatches[x].id %>"><%= maybeMatches[x].title %></a></h3>
                         </header>
-                        <p>Location: <%= data[x].location %></p>
-                        <p>Date: <%= data[x].date %></p>
+                        <p>Location: <%= maybeMatches[x].location %></p>
+                        <p>Date: <%= maybeMatches[x].date %></p>
                     </div>
                 <% } %>
             <%} else {%>
@@ -58,7 +58,7 @@
         </div>
     </main>
 
-    <div class="aside">
+    <div id="rankingAside" class="aside">
         <h2>Rankings: Explained</h2>
         <p>Rankings in Go start at a Kyu level for beginners, then progress into amateur Dan,
             and finally professional Dan.  <br><br>Kyu begins at 30 kyu (also denoted as 30k) for absolute beginners

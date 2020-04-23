@@ -13,52 +13,32 @@
 
         <main>
             <div class="container">
-                <h2>Kyu Matches</h2>
-                <div class="inner">
-                    <header>
-                        <h3>Brad vs Chad</h3>
-                        <p>RANKINGS: 1 dan vs 1 dan</p>
-                    </header>
-                    <p>DATE AND TIME</p>
-                    <p>PLACE</p>
-                    <p>REFEREE</p>
-                </div>
-
-                <div class="inner">
-                    <header>
-                        <h3>Brad vs Chad</h3>
-                        <p>RANKINGS: 1 dan vs 1 dan</p>
-                    </header>
-                    <p>DATE AND TIME</p>
-                    <p>PLACE</p>
-                    <p>REFEREE</p>
-                </div>
+                <h2>Matches</h2>
+                <% for (let i = 0; i < kyuMatchData.length; i++) { %>
+                    <div class="inner">
+                        <header>
+                            <a href="/match/<%= kyuMatchData[i].id %>"><h3><%= kyuMatchData[i].title %></h3></a>
+                        </header>
+                        <p><strong>DATE: </strong> <%= kyuMatchData[i].date %></p>
+                        <p><strong>LOCATION: </strong><%= kyuMatchData[i].location %></p>
+                    </div>
+                <% } %>
             </div>
 
             <div class="container">
                 <h2>Dan Matches</h2>
-                <div class="inner">
-                    <header>
-                        <h3>Komugi vs Meruem</h3>
-                        <p>RANKINGS: 10 dan vs 10 dan</p>
-                    </header>
-                    <p>TBD - 11:50 PM</p>
-                    <p>The Royal Palace of East Gorteau</p>
-                    <p>Pouf</p>
-                </div>
-
-                <div class="inner">
-                    <header>
-                        <h3>Brad vs Chad</h3>
-                        <p>RANKINGS: 10k vs 12k</p>
-                    </header>
-                    <p>DATE AND TIME</p>
-                    <p>PLACE</p>
-                    <p>REFEREE</p>
-                </div>
+                <% for (let i = 0; i < danMatchData.length; i++) { %>
+                    <div class="inner">
+                        <header>
+                            <a href="/match/<%= danMatchData[i].id %>"><h3><%= danMatchData[i].title %></h3></a>
+                        </header>
+                        <p><strong>DATE: </strong> <%= danMatchData[i].date %></p>
+                        <p><strong>LOCATION: </strong><%= danMatchData[i].location %></p>
+                    </div>
+                <% } %>
             </div>
 
-            <div class="aside">
+            <div id="indexAside" class="aside">
                 <h2>Want to play?</h2>
                 <p>Sign up here!</p>
             </div>
