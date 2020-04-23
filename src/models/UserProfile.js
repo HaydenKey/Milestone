@@ -1,8 +1,10 @@
+const MatchDB = require("../repositories/MatchDB");
+
 const matchList = [
     {
         id: "0",
         userName: "hkey8@uncc.edu",
-        match: "Meurem vs Komugi",
+        title: "Meurem vs Komugi",
         rank: "dan",
         location: "The Palace",
         date: "9/9/2020 at 11:59",
@@ -11,7 +13,7 @@ const matchList = [
     {
         id: "1",
         userName: "hkey8@uncc.edu",
-        match: "Chad vs Brad",
+        title: "Chad vs Brad",
         rank: "dan",
         location: "The ThunderDome",
         date: "9/9/2020 at 11:59",
@@ -20,7 +22,7 @@ const matchList = [
     {
         id: "5",
         userName: "hkey8@uncc.edu",
-        match: "Akuma vs Ken",
+        title: "Akuma vs Ken",
         rank: "kyu",
         location: "Caesar's Palace",
         date: "9/9/2020 at 11:59",
@@ -33,9 +35,9 @@ class UserProfile {
         this.userName = userName;
     }
 
-    getUserMatch(username, match) {
+    getUserMatch(username, title) {
         for (let x = 0; x < matchList.length; x++) {
-            if (username === matchList[x].userName && match === matchList[x].match) {
+            if (username === matchList[x].userName && title === matchList[x].title) {
                 return matchList[x];
             }
         }
@@ -66,27 +68,36 @@ class UserProfile {
         return userMatches;
     }
 
-    addMatch(username, match, rsvp) {
+    addMatch(username, matchId, rsvp) {
         // check if already in list
         for (let x = 0; x < matchList.length; x++) {
-            if (username === matchList[x].userName && match === matchList[x].match) {
+            if (username === matchList[x].userName && matchId === matchList[x].id) {
                 return;
             }
         }
 
-        let temp = {
-            userName: this.userName,
-            match: match,
-            rsvp: rsvp
-        };
+        let matchData = new MatchDB().getMatches();
+        let temp = {};
+
+        for (let i = 0; i < matchData.length; i++) {
+            if (matchData[i].id == matchId) {
+                temp = {
+                    userName: username,
+                    id: matchId,
+                    rsvp: rsvp,
+                    ...matchData[i]
+                };
+            }
+        }
+
+
 
         matchList.push(temp);
     }
 
     removeMatch(username, match) {
         for (let x = 0; x < matchList.length; x++) {
-            if (username === matchList[x].userName && match === matchList[x].match) {
-                console.log("ligma");
+            if (username === matchList[x].userName && match === matchList[x].title) {
                 matchList.splice(x, 1);
             }
         }
@@ -94,7 +105,7 @@ class UserProfile {
 
     updateRsvp(match, rsvp) {
         for (let x = 0; x < matchList.length; x++) {
-            if (this.userName === matchList[x].userName && match === matchList[x].match) {
+            if (this.userName === matchList[x].userName && match === matchList[x].title) {
                 matchList[x].rsvp = rsvp;
             }
         }

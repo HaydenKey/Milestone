@@ -14,12 +14,12 @@
     <main>
         <div class="container">
             <h2>Attending</h2>
+            <% console.log("YES MATCH LENGTH: " + yesMatches.length); %>
             <% if (yesMatches.length !== 0) {%>
                 <% for (let x = 0; x < yesMatches.length; x++) { %>
-                    <% console.log("YES MATCH: " + Object.keys(yesMatches[x])); %>
                     <div class="inner">
                         <header>
-                            <h3><a href="/match/<%= yesMatches[x].id %>"><%= yesMatches[x].match %></a></h3>
+                            <h3><a href="/match/<%= yesMatches[x].id %>"><%= yesMatches[x].title %></a></h3>
                         </header>
                         <p>Location: <%= yesMatches[x].location %></p>
                         <p>Date: <%= yesMatches[x].date %></p>
@@ -41,7 +41,7 @@
                 <% for (let x = 0; x < maybeMatches.length; x++) { %>
                     <div class="inner">
                         <header>
-                            <h3><a href="/match/<%= maybeMatches[x].id %>"><%= maybeMatches[x].match %></a></h3>
+                            <h3><a href="/match/<%= maybeMatches[x].id %>"><%= maybeMatches[x].title %></a></h3>
                         </header>
                         <p>Location: <%= maybeMatches[x].location %></p>
                         <p>Date: <%= maybeMatches[x].date %></p>

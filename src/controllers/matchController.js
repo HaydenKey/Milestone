@@ -13,7 +13,7 @@ router.get("/matches", (req, res) => {
     yesMatches = user.getUserMatchesRsvp(username,"yes");
     maybeMatches = user.getUserMatchesRsvp(username, "maybe");
 
-    console.log(yesMatches.keys());
+    console.log(yesMatches);
 
     res.render('matches', { yesMatches: yesMatches, maybeMatches: maybeMatches });
 });
