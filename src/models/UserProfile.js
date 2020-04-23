@@ -97,7 +97,9 @@ class UserProfile {
 
     removeMatch(username, match) {
         for (let x = 0; x < matchList.length; x++) {
-            if (username === matchList[x].userName && match === matchList[x].title) {
+            console.log(username === matchList[x].userName);
+            console.log(match + " === " + matchList[x].id);
+            if (username === matchList[x].userName && match === matchList[x].id) {
                 matchList.splice(x, 1);
             }
         }
