@@ -1,8 +1,14 @@
 const MatchDB = require("../repositories/MatchDB");
+const mongoose = require('mongoose');
+const Match = require("../models/match");
+const User = require("../models/User");
+
+
+mongoose.connect('mongodb://localhost/goDB', {useNewUrlParser: true});
 
 const matchList = [
     {
-        id: "0",
+        id: "5ea2718352613ab27b89baca",
         userName: "hkey8@uncc.edu",
         title: "Meurem vs Komugi",
         rank: "dan",
@@ -11,16 +17,16 @@ const matchList = [
         rsvp: "yes"
     },
     {
-        id: "1",
+        id: "5ea2718352613ab27b89bacb",
         userName: "hkey8@uncc.edu",
         title: "Chad vs Brad",
         rank: "dan",
-        location: "The ThunderDome",
+        location: "Your mom's house",
         date: "9/9/2020 at 11:59",
         rsvp: "yes"
     },
     {
-        id: "5",
+        id: "5ea2718352613ab27b89bacf",
         userName: "hkey8@uncc.edu",
         title: "Akuma vs Ken",
         rank: "kyu",
@@ -30,87 +36,60 @@ const matchList = [
     }
 ];
 
+
 class UserProfile {
     constructor(userName) {
         this.userName = userName;
     }
 
-    getUserMatch(username, title) {
-        for (let x = 0; x < matchList.length; x++) {
-            if (username === matchList[x].userName && title === matchList[x].title) {
-                return matchList[x];
-            }
-        }
+    async getUserMatches(username) {
+        let user = await User.find({username: username});
+        return user[0].connections;
     }
 
-    getUserMatches() {
-        let userMatches = [];
+    async getUserMatchesRsvp(username, rsvp) {
+        let user = await User.find({username: username});
+        let matches = [];
 
-        for (let x = 0; x < matchList.length; x++) {
-            if (this.userName === matchList[x].userName) {
-                userMatches.push(matchList[x]);
+        for (let i = 0; i < user[0].connections.length; i++) {
+            if (user[0].connections[i].rsvp === rsvp) {
+                matches.push(user[0].connections[i]);
             }
         }
 
-        return userMatches;
+        return matches;
     }
 
-    getUserMatchesRsvp(username, rsvp) {
-        let userMatches = [];
-        username = String(username);
-        rsvp = String(rsvp);
+    async addMatch(username, matchId, rsvp) {
+        // TODO: make sure this works
+        // gets match from Match Collection
+        let match = await Match.find({_id: matchId})
+            .catch(err => {
+                return {error: err};
+            });
 
-        for (let x = 0; x < matchList.length; x++) {
-            if (matchList[x].userName == username && rsvp == matchList[x].rsvp) {
-                userMatches.push(matchList[x]);
-            }
-        }
-        return userMatches;
+
+
+        // saves object to user collection
+        await User.findOneAndUpdate(
+            { username: username },
+            { $push: { connections: {
+                        _id: matchId,
+                        title: match[0].title,
+                        rank: match[0].rank,
+                        location: match[0].location,
+                        date: match[0].date,
+                        rsvp: rsvp
+                    } } },
+        );
     }
 
-    addMatch(username, matchId, rsvp) {
-        // check if already in list
-        for (let x = 0; x < matchList.length; x++) {
-            if (username === matchList[x].userName && matchId === matchList[x].id) {
-                return;
-            }
-        }
-
-        let matchData = new MatchDB().getMatches();
-        let temp = {};
-
-        for (let i = 0; i < matchData.length; i++) {
-            if (matchData[i].id == matchId) {
-                temp = {
-                    userName: username,
-                    id: matchId,
-                    rsvp: rsvp,
-                    ...matchData[i]
-                };
-            }
-        }
-
-
-
-        matchList.push(temp);
-    }
-
-    removeMatch(username, match) {
-        for (let x = 0; x < matchList.length; x++) {
-            console.log(username === matchList[x].userName);
-            console.log(match + " === " + matchList[x].id);
-            if (username === matchList[x].userName && match === matchList[x].id) {
-                matchList.splice(x, 1);
-            }
-        }
-    }
-
-    updateRsvp(match, rsvp) {
-        for (let x = 0; x < matchList.length; x++) {
-            if (this.userName === matchList[x].userName && match === matchList[x].title) {
-                matchList[x].rsvp = rsvp;
-            }
-        }
+    async removeMatch(username, matchId) {
+        // saves object to user collection
+        let temp = await User.findOneAndUpdate(
+            { username: username },
+            { $pull: { connections: { _id: matchId } } },
+        );
     }
 }
 

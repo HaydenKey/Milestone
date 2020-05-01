@@ -1,37 +1,53 @@
 const express = require("express");
 const MatchDB = require("../repositories/MatchDB");
+const mongoose = require('mongoose');
 const UserProfile = require("../models/UserProfile");
+const Match = require("../models/match");
 
 const router = express.Router();
 
-router.get("/matches", (req, res) => {
-    let username = req.session.profile.userName;
-    let user = new UserProfile(username);
-    let yesMatches = [];
-    let maybeMatches = [];
+mongoose.connect('mongodb://localhost/goDB', {useNewUrlParser: true});
 
-    yesMatches = user.getUserMatchesRsvp(username,"yes");
-    maybeMatches = user.getUserMatchesRsvp(username, "maybe");
+// TODO: change this to user and make it grab connections from the array in users
+// TODO: if possible, move this to UserProfile
+router.get("/matches", async (req, res) => {
+    if (req.session.profile != null) {
+        let userID = req.session.profile.userName;
+        let matches = [];
+        //TODO: change to use sessions
+        matches = await new UserProfile().getUserMatches(userID);
+        let yesMatches = [];
+        let maybeMatches = [];
 
-    console.log(yesMatches);
+        for (let i = 0; i < matches.length; i++) {
+            if (matches[i].rsvp === "yes") {
+                yesMatches.push(matches[i]);
+            } else {
+                maybeMatches.push(matches[i]);
+            }
+        }
 
-    res.render('matches', { yesMatches: yesMatches, maybeMatches: maybeMatches });
+        res.render('matches', { yesMatches: yesMatches, maybeMatches: maybeMatches });
+    } else {
+        res.redirect('/login');
+    }
 });
 
-router.get("/:id", function(req, res) {
+router.get("/:id", async (req, res) => {
     let id = req.params.id;
-    let con = new MatchDB().getMatch(id);
-    let currentMatch = {
-        id: con.id,
-        title: con.title,
-        location: con.location,
-        date: con.date
-    };
 
-    res.render("match", { data: currentMatch });
+    await Match.findById(id)
+        .exec()
+        .then(doc => {
+            res.render("match", { data: doc });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
 });
 
-router.post('/:id', (req, res) => {
+router.post('/:id', async (req, res) => {
     if (req.session.profile != null) {
         let userID = req.session.profile.userName;
         let matchId = req.params.id;
@@ -39,15 +55,15 @@ router.post('/:id', (req, res) => {
         let user = new UserProfile(userID);
 
         if (rsvp === 'yes') {
-            user.removeMatch(userID, matchId);
-            user.addMatch(userID, matchId, rsvp);
+            await user.removeMatch(userID, matchId);
+            await user.addMatch(userID, matchId, rsvp);
             res.redirect('matches');
         } else if (rsvp === 'no') {
-            user.removeMatch(userID, matchId);
+            await user.removeMatch(userID, matchId);
             res.redirect('matches');
         } else if (rsvp === 'maybe') {
-            user.removeMatch(userID, matchId);
-            user.addMatch(userID, matchId, rsvp);
+            await user.removeMatch(userID, matchId);
+            await user.addMatch(userID, matchId, rsvp);
             res.redirect('matches');
         }
     } else {

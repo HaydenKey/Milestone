@@ -1,40 +1,18 @@
-class User {
-    constructor(playerId, firstName, lastName, email) {
-        this.playerId = playerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
+const mongoose = require('mongoose');
 
-    getPlayerId() {
-        return this.playerId;
-    }
+const userSchema = mongoose.Schema({
+    id: mongoose.Schema.Types.ObjectId,
+    firstName: String,
+    lastName: String,
+    password: String,
+    connections: [{
+        id: mongoose.Schema.Types.ObjectId,
+        title: String,
+        rank: String,
+        location: String,
+        date: String,
+        rsvp: String
+        }]
+});
 
-    setPlayerId(val) {
-        this.playerId = val;
-    }
-
-    getFirstName() {
-        return this.firstName;
-    }
-
-    setFirstName(val) {
-        this.firstName = val;
-    }
-    getLastName() {
-        return this.lastName;
-    }
-
-    setLastName(val) {
-        this.lastName = val;
-    }
-
-    getEmail() {
-        return this.email;
-    }
-
-    setEmail(val) {
-        this.email = val;
-    }
-}
-module.exports = User;
+module.exports = mongoose.model('User', userSchema, 'users');

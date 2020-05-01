@@ -17,7 +17,7 @@
                 <% for (let i = 0; i < kyuMatchData.length; i++) { %>
                     <div class="inner">
                         <header>
-                            <a href="/match/<%= kyuMatchData[i].id %>"><h3><%= kyuMatchData[i].title %></h3></a>
+                            <a href="/match/<%= kyuMatchData[i]._id %>"><h3><%= kyuMatchData[i].title %></h3></a>
                         </header>
                         <p><strong>DATE: </strong> <%= kyuMatchData[i].date %></p>
                         <p><strong>LOCATION: </strong><%= kyuMatchData[i].location %></p>
@@ -30,7 +30,7 @@
                 <% for (let i = 0; i < danMatchData.length; i++) { %>
                     <div class="inner">
                         <header>
-                            <a href="/match/<%= danMatchData[i].id %>"><h3><%= danMatchData[i].title %></h3></a>
+                            <a href="/match/<%= danMatchData[i]._id %>"><h3><%= danMatchData[i].title %></h3></a>
                         </header>
                         <p><strong>DATE: </strong> <%= danMatchData[i].date %></p>
                         <p><strong>LOCATION: </strong><%= danMatchData[i].location %></p>

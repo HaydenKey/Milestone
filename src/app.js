@@ -1,6 +1,7 @@
 const indexRouter = require("./controllers/indexController");
 const matchRouter = require("./controllers/matchController");
 const userControllerRouter = require("./controllers/UserController");
+const mongoose = require('mongoose');
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
@@ -14,6 +15,7 @@ app.use(
     })
 );
 
+mongoose.connect('mongodb://localhost/goDB', {useNewUrlParser: true});
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.urlencoded({ extended: false }));

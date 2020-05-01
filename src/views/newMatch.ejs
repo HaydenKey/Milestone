@@ -9,12 +9,17 @@
         <%- include ('partials/nav.ejs')%>
 
         <form>
-            <label>Opponent Name</label>
-            <input type="text">
-            <label>When</label>
-            <input type="text">
-            <label>Where</label>
-            <input type="text">
+            <label for="title"><b>Title: </b></label>
+            <input type="text" placeholder="Who's playing?" name="title" id="title" required><br>
+
+            <label for="rank"><b>Rank: </b></label>
+            <input type="text" placeholder="Enter Rank" name="rank" id="rank" required><br>
+
+            <label for="location"><b>location: </b></label>
+            <input type="text" placeholder="Enter Location: " name="location" id="location" required><br>
+
+            <label for="date"><b>date: </b></label>
+            <input type="text" placeholder="Enter date" name="date" id="date" required><br>
         </form>
 
         <%- include ('partials/footer.ejs')%>
